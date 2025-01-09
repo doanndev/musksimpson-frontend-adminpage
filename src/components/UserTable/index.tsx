@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import './UserTable.css'
+import './UserTable.css';
 
 type History = {
   _id: string;
@@ -18,10 +18,12 @@ export default function UserTable() {
   const [selectedWalletId, setSelectedWalletId] = useState<string | null>(null);
   const [newAmount, setNewAmount] = useState<number>(0);
 
+  // Toggle the MSS/BNS switch
   const toggleSwitch = () => {
     setIsMSS((prev) => !prev);
   };
 
+  // Fetch history data on initial load
   useEffect(() => {
     const fetchHistory = async () => {
       const token = sessionStorage.getItem("token"); 
@@ -31,26 +33,31 @@ export default function UserTable() {
         return;
       }
 
-      const response = await fetch("https://musksimpson-backend.onrender.com/api/v1/histories", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`, 
-        },
-      });
+      try {
+        const response = await fetch("https://musksimpson-backend.onrender.com/api/v1/histories", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`, 
+          },
+        });
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch history data.");
+        if (!response.ok) {
+          throw new Error("Failed to fetch history data.");
+        }
+
+        const result = await response.json();
+        setData(result.messages);
+        setFilteredData(result.messages);
+      } catch (error) {
+        console.error("Error fetching history:", error);
       }
-
-      const result = await response.json();
-      setData(result.messages);
-      setFilteredData(result.messages);
     };
 
     fetchHistory();
   }, []);
 
+  // Filter data based on search term
   useEffect(() => {
     const filtered = data.filter((item) =>
       item.wallet_id.toLowerCase().includes(searchTerm.toLowerCase())
@@ -59,29 +66,34 @@ export default function UserTable() {
     setCurrentPage(1); 
   }, [searchTerm, data]);
 
+  // Convert BNB to MSS or vice versa
   function switchCoin(amountOfBNB: number) {
     const bnbConversionRate = 84000000000;
     const amountOfMSS: number = amountOfBNB * bnbConversionRate;
     return isMSS ? `${amountOfMSS} MSS` : `${amountOfBNB} BNB`;
   }
 
+  // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  // Generate page numbers for pagination
   const pageNumbers = [];
   for (let i = 1; i <= Math.ceil(filteredData.length / itemsPerPage); i++) {
     pageNumbers.push(i);
   }
 
+  // Open modal to edit item
   const openEditModal = (walletId: string, amount: number) => {
     setSelectedWalletId(walletId);
     setNewAmount(amount);
     setIsModalOpen(true);
   };
 
+  // Handle editing item amount
   const handleEdit = async () => {
     const token = sessionStorage.getItem("token");
     if (!token || !selectedWalletId) {
@@ -117,6 +129,7 @@ export default function UserTable() {
     }
   };
 
+  // Handle deleting item
   const handleDelete = async (walletId: string) => {
     const token = sessionStorage.getItem("token");
     if (!token) {
@@ -146,7 +159,7 @@ export default function UserTable() {
   };
 
   if (data.length === 0) {
-    return <h1>loading...</h1>;
+    return <h1>Loading...</h1>;
   } else {
     return (
       <div className="user-table">
