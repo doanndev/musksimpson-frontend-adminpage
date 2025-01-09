@@ -1,0 +1,226 @@
+
+.user-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .user-table th, .user-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+
+  .user-table .header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+  
+  .user-table th {
+    background-color: #f4f4f4;
+  }
+
+  .search-container {
+    margin: 20px 0;
+    text-align: right;
+  }
+  
+  .search-container input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 250px;
+    font-size: 14px;
+  }
+  
+  .search-container input:focus {
+    outline: none;
+    border-color: #007BFF;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+  
+
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+  
+  /* Style cho các nút trong bảng */
+  button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  
+  /* Nút Edit */
+  button.edit {
+    background-color: #007BFF;
+    color: white;
+    margin-right: 15px;
+  }
+  
+  button.edit:hover {
+    background-color: #007BFF;
+    transform: scale(1.05);
+  }
+  
+  /* Nút Delete */
+  button.delete {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  button.delete:hover {
+    background-color: #e53935;
+    transform: scale(1.05);
+  }
+  
+  /* Khi các nút được nhấn, có thể áp dụng hiệu ứng */
+  button:active {
+    transform: scale(0.98);
+  }
+
+
+.switch-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #007BFF;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+
+
+  .pagination {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .pagination button {
+    padding: 8px 16px;
+    border: none;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;
+  }
+  
+  .pagination button:hover {
+    background-color: #007BFF;
+  }
+  
+
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Tạo hiệu ứng mờ cho nền */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Nội dung Modal */
+  .modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Tiêu đề Modal */
+  .modal-content h3 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+  }
+  
+  /* Input trong modal */
+  .modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+  }
+  
+  /* Nút submit và cancel */
+  .modal-content button {
+    width: 48%;
+    padding: 10px;
+    margin: 10px 1%;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #000;
+  }
+  
+  .modal-content button:first-child {
+    background-color: #4CAF50; /* Nút submit */
+  }
+  
+  .modal-content button:last-child {
+    background-color: #f44336; /* Nút cancel */
+  }
+  
+  /* Hiệu ứng hover cho nút */
+  .modal-content button:hover {
+    opacity: 0.9;
+  }
